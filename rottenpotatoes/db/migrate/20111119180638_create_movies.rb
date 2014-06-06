@@ -9,6 +9,10 @@ class CreateMovies < ActiveRecord::Migration
       # of when movies are added or modified:
       t.timestamps
     end
+
+    # create and apply a migration that adds the
+    # Director field to the movies table
+    add_column :movies, :director, :string, default: ''
   end
 
   def down
