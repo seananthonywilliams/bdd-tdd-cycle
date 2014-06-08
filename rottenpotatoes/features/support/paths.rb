@@ -11,10 +11,21 @@ module NavigationHelpers
   # step definition in web_steps.rb
   #
   def path_to(page_name)
+#debugger
     case page_name
 
-    when /^the home\s?page$/
-      '/'
+    when /^the home\s?page$/ then '/movies'
+
+    when /^the edit page for "(.*)"$/
+      # See this Stack Overflow link for why this works:
+      # http://stackoverflow.com/questions/11129472/how-to-create-a-cucumber-step-definition-for-a-edit-path
+      edit_movie_path(Movie.find_by_title($1))
+
+    when /^the details page for "(.*)"$/
+      movie_path(Movie.find_by_title($1))
+
+    when /^the Similar Movies page for "(.*)"$/
+      '/movies/find_with_same_director/' + Movie.find_by_title($1).id.to_s
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
